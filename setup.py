@@ -4,7 +4,7 @@ setup(
     name="graphql_client",
     description="A GraphQL Client",
     long_description=open('README.rst').read(),
-    version="0.1.1",
+    version="0.2.0",
     packages=find_packages(),
     install_requires=[
         'requests'
