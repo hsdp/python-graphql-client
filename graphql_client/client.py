@@ -58,10 +58,13 @@ class GraphQLClient(object):
         if extra_headers:
             headers.update(extra_headers)
 
-        r = requests.post(self.endpoint, data=json.dumps(data), headers=headers)
-
         retries_count = 0
         if not self.retries:
+            r = requests.post(
+                self.endpoint,
+                data=json.dumps(data),
+                headers=headers
+            )
             return r.json()
         else:
             while retries_count < self.retries:
