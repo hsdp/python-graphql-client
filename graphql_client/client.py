@@ -58,7 +58,6 @@ class GraphQLClient(object):
         if extra_headers:
             headers.update(extra_headers)
 
-        retries_count = 0
         if not self.retries:
             r = requests.post(
                 self.endpoint,
@@ -66,19 +65,20 @@ class GraphQLClient(object):
                 headers=headers
             )
             return r.json()
-        else:
-            while retries_count < self.retries:
-                try:
-                    log.info('*** Retrying GraphQL query.. attempt #: {}'
-                             .format(retries_count))
-                    r = requests.post(
-                        self.endpoint,
-                        data=json.dumps(data),
-                        headers=headers
-                    )
-                    return r.json()
-                except Exception as e:
-                    log.error('*** GraphQL request failed with exception: {}'
-                              .format(e))
-                finally:
-                    retries_count += 1
+
+        retries_count = 0
+        while retries_count < self.retries:
+            try:
+                log.info('*** Retrying GraphQL query.. attempt #: {}'
+                         .format(retries_count))
+                r = requests.post(
+                    self.endpoint,
+                    data=json.dumps(data),
+                    headers=headers
+                )
+                return r.json()
+            except Exception as e:
+                log.error('*** GraphQL request failed with exception: {}'
+                          .format(e))
+            finally:
+                retries_count += 1

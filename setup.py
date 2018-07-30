@@ -4,7 +4,7 @@ setup(
     name="graphql_client",
     description="A GraphQL Client",
     long_description=open('README.rst').read(),
-    version="0.2.0",
+    version="0.3.0",
     packages=find_packages(),
     install_requires=[
         'requests'
@@ -17,4 +17,3 @@ setup(
     author="Kevin Smithson",
     author_email="kevin.smithson@philips.com"
 )
-
